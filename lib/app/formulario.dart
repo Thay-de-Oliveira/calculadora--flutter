@@ -32,9 +32,7 @@ class _FormularioState extends State<Formulario> {
             //NOME
             TextField(
               controller: _nomeController,
-              decoration: InputDecoration(
-                labelText: 'Nome',
-              ),
+              decoration: InputDecoration(labelText: 'Nome'),
             ),
             SizedBox(height: 16.0),
 
