@@ -5,7 +5,7 @@ import 'components/menu.dart';
 import 'home.dart';
 
 class Formulario extends StatefulWidget {
-  const Formulario({super.key});
+  const Formulario({Key? key}) : super(key: key);
 
   @override
   State<Formulario> createState() => _FormularioState();

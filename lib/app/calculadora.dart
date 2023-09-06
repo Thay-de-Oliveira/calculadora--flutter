@@ -6,18 +6,22 @@ import 'home.dart';
 import 'formulario.dart';
 
 class Calculadora extends StatelessWidget {
-  @override
+  @override //Substitui método da classe pai
   Widget build(BuildContext context) {
+    //Define estrutura e recebe objeto
     return MaterialApp(
+      //Widget padrão para criar app
       title: 'Calculadora online',
-      theme: ThemeData(primarySwatch: Colors.purple),
-      home: DisplayCalculadora(),
+      theme: ThemeData(primarySwatch: Colors.purple), //Tema/cor do app
+      home:
+          DisplayCalculadora(), //Roda a aplicação da calculadra quando for iniciado
     );
   }
 }
 
 class DisplayCalculadora extends StatefulWidget {
-  const DisplayCalculadora({super.key});
+  //Cria nova classe
+  const DisplayCalculadora({Key? key}) : super(key: key); //Contrututor
 
   @override
   State<DisplayCalculadora> createState() => _DisplayCalculadoraState();
