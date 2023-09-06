@@ -35,13 +35,18 @@ class _DisplayCalculadoraState extends State<DisplayCalculadora> {
   double _previousValue = 0.0;
 
   void _handleButtonPress(String buttonText) {
+    //Função para reconhecer o texto do botão selecionado
     setState(() {
+      //Notifica que o widget está sendo alterado e precisa de reconstrução
       if (buttonText == '=') {
+        //Valida se o botão selecionado é "="
         if (_currentOperator.isNotEmpty && _input.isNotEmpty) {
-          double currentValue = double.parse(_input);
+          //Valida se tem um operador e um valor sendo inserido antes do "="
+          double currentValue = double.parse(
+              _input); //Converte a string (valor de entrada) para double
           switch (_currentOperator) {
             case '+':
-              _result = _previousValue + currentValue;
+              _result = _previousValue + currentValue; //Realiza operação
               break;
             case '-':
               _result = _previousValue - currentValue;
@@ -53,31 +58,39 @@ class _DisplayCalculadoraState extends State<DisplayCalculadora> {
               _result = _previousValue / currentValue;
               break;
           }
-          _input = _result.toStringAsFixed(2);
-          _currentOperator = '';
-          _currentOperationText = '';
+          _input = _result.toStringAsFixed(
+              2); //Atualiza input com o resultado da operação anterior e formata o valor com ","
+          _currentOperator =
+              ''; //String vazia = Não tem nenhum operador selecionado
+          _currentOperationText = ''; //Exibe o operador selecionado atual
           _previousValue = _result; // Atualiza o valor anterior com o resultado
         }
       } else if (buttonText == 'C') {
+        //Limpar operação
         _input = '';
         _result = 0.0;
         _currentOperator = '';
         _currentOperationText = '';
         _previousValue = 0.0;
       } else if (_isOperator(buttonText)) {
+        //Se um botão de operador for selecionado
         if (_input.isNotEmpty) {
-          _previousValue = double.parse(_input);
-          _input = '';
+          //Valida se a entrada não é vazia
+          _previousValue = double.parse(
+              _input); //Converte a string (valor de entrada) para double
+          _input = ''; //Limpa a entrada anterior para receber nova
         }
-        _currentOperator = buttonText;
-        _currentOperationText = buttonText;
+        _currentOperator = buttonText; //Armazena o operador pressionado
+        _currentOperationText = buttonText; //Define o texto do operador atual
       } else {
-        _input += buttonText;
+        //Se o botão selecionado NÂO for um operador
+        _input += buttonText; //Adiciona texto para permitir que novas entradas
       }
     });
   }
 
   bool _isOperator(String buttonText) {
+    //Verifica se o valor inserido é um operador
     return buttonText == '+' ||
         buttonText == '-' ||
         buttonText == '*' ||
@@ -85,17 +98,21 @@ class _DisplayCalculadoraState extends State<DisplayCalculadora> {
   }
 
   Widget _buildButton(String buttonText, Color color) {
+    //Interface com botões
     return Expanded(
+      //Distribui os botões uniformemente
       child: ElevatedButton(
+        //Sombra no botão pressionado
         style: ElevatedButton.styleFrom(
           primary: color,
           padding: EdgeInsets.all(30.0),
           textStyle: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
         ),
         onPressed: () {
-          _handleButtonPress(buttonText);
+          //Quando botão pressionado
+          _handleButtonPress(buttonText); //Chama função
         },
-        child: Text(buttonText),
+        child: Text(buttonText), //Texto aparece no botão
       ),
     );
   }
@@ -103,12 +120,13 @@ class _DisplayCalculadoraState extends State<DisplayCalculadora> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Calculadora online')),
-      drawer: Menu(context),
+      appBar: AppBar(title: Text('Calculadora online')), //Barra superior
+      drawer: Menu(context), //Chama menu
       body: Column(
         children: [
           Expanded(
             child: Container(
+              //Define os botões, estilo e ordem
               padding: EdgeInsets.all(16.0),
               alignment: Alignment.bottomRight,
               child: Column(
